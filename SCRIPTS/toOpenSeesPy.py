@@ -48,33 +48,73 @@
 
 # Helper function to deterine if a variable is a floating point value or not
 #
-def isfloat(value):
-  try:
-    float(value)
-    return True
-  except ValueError:
-    return False
+def isfloat(value):  # should probably combine this with exprFlag check
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+# Helper function to process specific parts of conversion
+#
+def convertLine(line, type='standard'):
+    # if(type == 'comment'):  # for in-line comments; comments spanning an entire line already handled
+        # line = line
+    if(type == 'expr'):
+        line = line
+    elif(type == 'set'):
+        line = line
+    else:  # standard command
+        line = line
+    return line
 
 # Function that does the conversion
 #
 def toOpenSeesPy():
-    # outfile.write('\n\n')
-    filename = input("Enter filename: ")
+    filename = input("Enter filename (no extension): ")
     outfile = open(filename + '.py', 'w')
-    infile = open(filename + '.tcl','r')
+    infile = open(filename + '.tcl', 'r')
+    outfile.write('from openseespy.opensees import *\n')
+    outfile.write('import math\n')  # for exponents
+    
     for line in infile:
+        #if ";" in line:
+        line = line.replace(";", "")
+
+        exprFlag = False
+        if "expr" in line:
+            line = line.replace("[expr", "")
+            line = line.replace("]", "")
+            exprFlag = True
+        
+        # if "#" in line:
+            # line = convertLine(line, 'comment')
+
+        setFlag = False
+        quotesFlag = False
+        if "set" in line:
+            line = line.replace("set", "")
+            setFlag = True
+            if "\"" in line:  # don't add single quotes if double quotes already found
+                quotesFlag = True
+
         info = line.split()
         N = len(info)
-        
+
         # Ignore a close brace
         if N > 0 and info[0][0] == '}':
             continue
-        # Echo a comment line
-        if N < 2 or info[0][0] == '#':
+	# Echo a comment line
+        # if N < 2 or info[0][0] == '#':
+        if N < 2 or info[0][0] == '#':  # might want to consider using an 'in' check to process comments, but this works for now...
+            if 'wipe' in line:
+                line = line.replace("wipe", "wipe()")
+            elif 'initialize' in line:
+                line = line.replace("initialize", "initialize()")
             outfile.write(line)        
             continue
-        
-        # Needs to be a special case for now due to beam integration
+	  
+	# Needs to be a special case for now due to beam integration
         if info[1] == 'forceBeamColumn' or info[1] == 'dispBeamColumn':
             secTag = info[6]
             eleTag = info[2]
@@ -84,34 +124,56 @@ def toOpenSeesPy():
             outfile.write('element(\'%s\',%s,%s,%s,%s,%s)\n' % (info[1],eleTag,info[3],info[4],info[7],eleTag))
             continue
 
-        # Change print to printModel
+	# Change print to printModel
         if info[0] == 'print':
             info[0] = 'printModel'
-            
-        # Update wipe command
-        if info[0] == 'wipe;' or info[0] == 'wipe;\n':
-            info[0] = 'wipe()'
-        
+
         # For everything else, have to do the first one before loop because of the commas
-        if isfloat(info[1]):        
-            outfile.write('%s(%s' % (info[0],info[1]))            
+        if setFlag == True:
+            info[0] = info[0] + " = "
+            if isfloat(info[1]) or exprFlag == True or quotesFlag == True:  # no quotes around expressions or existing double quotes
+                outfile.write('%s%s' % (info[0],info[1]))
+            else:
+                outfile.write('%s\'%s\'' % (info[0],info[1]))
         else:
-            outfile.write('%s(\'%s\'' % (info[0],info[1]))
-        # Now loop through the rest with preceding commas
+            if isfloat(info[1]) or exprFlag == True:     
+                outfile.write('%s(%s' % (info[0],info[1]))     
+            else:
+                outfile.write('%s(\'%s\'' % (info[0],info[1]))
+            
+
+	# Now loop through the rest with preceding commas
         writeClose = True
+        commentFlag = False
         for i in range (2,N):
+            varFlag = False
+            if info[i] == "#":
+                if setFlag == False:
+                    info[i] = ") " + info[i]
+                else:
+                    info[i] = " " + info[i]
+                commentFlag = True
+            if "$" in info[i]:
+                varFlag = True
+                info[i] = info[i].replace("$", "")
             if info[i] == '{':
                 writeClose = True
                 break
             if info[i] == '}':
                 writeClose = False                
                 break
-            if isfloat(info[i]):
-                outfile.write(',%s' % info[i])
+            if commentFlag == True or setFlag == True:
+                outfile.write(info[i] + " ")
             else:
-                outfile.write(',\'%s\'' % info[i])
+                if isfloat(info[i]) or exprFlag == True or varFlag == True:
+                    outfile.write(',%s' % info[i])
+                else:
+                    outfile.write(',\'%s\'' % info[i])
         if writeClose:
-            outfile.write(')\n')        
+            if commentFlag == False and setFlag == False:
+                outfile.write(')\n')
+            else:
+                outfile.write('\n')
     infile.close()
     outfile.close()
 
