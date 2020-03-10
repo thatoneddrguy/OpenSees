@@ -51,7 +51,7 @@ CMakeLists.txt
 .dropbox.attr
 
 # OTHER
-Makefile.def
+#Makefile.def
 PlainConcrete.f
 forumat.f
 Damage2p.cpp
