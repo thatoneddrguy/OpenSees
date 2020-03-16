@@ -29,7 +29,7 @@ openseesdir = /home/student/OpenSees
 # directory for putting temp library files
 libpath = /home/student/OpenSees/lib
 # python include path
-pythoninclude = /usr/include/python3
+pythoninclude = /usr/include/python3.7
 
 
 # PROGRAMMING_MODE = SEQUENTIAL
@@ -218,9 +218,10 @@ else
 
 MPI_BIN = $(mpidir)/bin
 #MPI_INCLUDE = -I$(mpidir)/include  # JK
-MPI_INCLUDE = /usr/include/x86_64-linux-gnu/mpich
+MPI_INCLUDE = -I/usr/include/x86_64-linux-gnu/mpich
 #MPI_LIB = -L$(mpidir)/lib  # JK
-MPI_LIB = /usr/lib/x86_64-linux-gnu/mpich/include
+#MPI_LIB = -L/usr/lib/x86_64-linux-gnu/mpich/include  # JK
+MPI_LIB = -L/usr/lib
 #NVCC    = /usr/local/apps/cuda/cuda-7.5.18/bin/nvcc
 
 CC++            =  $(MPI_BIN)/mpicxx
@@ -340,7 +341,7 @@ else
 #MUMPS_LIB = -L$(mumpsdir)/lib \  # JK
 MUMPS_LIB = -L/usr/lib/x86_64-linux-gnu/mpich/include \
 #          -L$(scalapackdir)/lib \
-	  -L/usr/lib/x86_64-linux-gnu/mpich/include/ \
+	  -L/usr/lib/x86_64-linux-gnu/mpich/include \
 	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSOE.o \
 	$(FE)/system_of_eqn/linearSOE/mumps/MumpsSolver.o \
 	$(FE)/system_of_eqn/linearSOE/mumps/MumpsParallelSOE.o \
@@ -355,7 +356,7 @@ MUMPS_INCLUDE = -I/usr/include/x86_64-linux-gnu/mpich
 #			-lpetsc -lX11 -ludev -lxml2 -lrt -lparmetis -llapack
 #PETSC_INCLUDE = -I$(PETSC_DIR)/include -I$(PETSC_DIR)/$(PETSC_ARCH)/include
 
-OTHER_PARA_LIB =  -lparmetis -lmetis -lmpi -lmpicxx -lmpifort
+OTHER_PARA_LIB =  -lparmetis -lmetis -lmpi -lmpichcxx -lmpichfort
 
 endif
 
