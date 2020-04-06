@@ -204,6 +204,11 @@ void* OPS_YamamotoBiaxialHDR();
 void* OPS_FourNodeTetrahedron();
 void* OPS_CatenaryCableElement();
 
+void* OPS_FourNodeQuadWall3d();  // CSUF
+void* OPS_Concrete0(); // CSUF
+void* OPS_Concrete01T(); //CSUF
+
+
 namespace {
 
     struct char_cmp {
@@ -574,6 +579,10 @@ namespace {
 	functionMap.insert(std::make_pair("zeroLengthND", &OPS_ZeroLengthND));
 	functionMap.insert(std::make_pair("FourNodeTetrahedron", &OPS_FourNodeTetrahedron));
 	functionMap.insert(std::make_pair("CatenaryCable", &OPS_CatenaryCableElement));
+
+	functionMap.insert(std::make_pair("QuadWall3d", &OPS_FourNodeQuadWall3d));  // CSUF
+	functionMap.insert(std::make_pair("Concrete0", &OPS_Concrete0));  // CSUF
+	functionMap.insert(std::make_pair("Concrete01T", &OPS_Concrete01T));  // CSUF
 
 	return 0;
     }
