@@ -26,7 +26,7 @@ tcl: $(TclOBJS)
 	 -o tclInterpreter
 
 #PYTHON_LIBRARY = -framework Python
-PYTHON_LIBRARY =
+PYTHON_LIBRARY = /usr/lib/python3.7
 
 python:  $(PythonOBJS)
 	$(LINKER) $(LINKFLAGS) $(PythonOBJS) \

@@ -176,6 +176,8 @@ TCL_COMMAND_LIBS = $(FE)/domain/pattern/TclPatternCommand.o \
 	$(FE)/material/uniaxial/snap/TclSnapMaterialCommand.o \
 	$(FE)/material/uniaxial/fedeas/TclFedeasMaterialCommand.o \
 	$(FE)/material/uniaxial/drain/TclDrainMaterialCommand.o \
+	$(FE)/element/mvlem/TclFourNodeMVLEM3DCommand.o \
+	$(FE)/element/mvlem/TclFourNodeSFI_MVLEM3DCommand.o \
 	$(FE)/api/elementAPI_TCL.o
 
 
@@ -517,6 +519,7 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/elasticBeamColumn/WheelRail.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuad.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuad3d.o \
+	$(FE)/element/fourNodeQuad/FourNodeQuadWall3d.o \
 	$(FE)/element/fourNodeQuad/FourNodeQuadWithSensitivity.o \
 	$(FE)/element/fourNodeQuad/ConstantPressureVolumeQuad.o \
 	$(FE)/element/fourNodeQuad/EnhancedQuad.o \
@@ -609,6 +612,8 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/UWelements/SSPbrickUP.o \
 	$(FE)/element/mvlem/MVLEM.o \
 	$(FE)/element/mvlem/SFI_MVLEM.o \
+	$(FE)/element/mvlem/FourNodeMVLEM3D.o \
+	$(FE)/element/mvlem/FourNodeSFI_MVLEM3D.o \
 	$(FE)/element/UWelements/Quad4FiberOverlay.o \
 	$(FE)/element/UWelements/Brick8FiberOverlay.o \
 	$(FE)/element/UWelements/QuadBeamEmbedContact.o \
@@ -675,7 +680,9 @@ MATERIAL_LIBS   =  $(FE)/material/Material.o \
 	$(FE)/material/uniaxial/ParallelMaterial.o \
 	$(FE)/material/uniaxial/SeriesMaterial.o \
 	$(FE)/material/uniaxial/Neoprene.o \
+	$(FE)/material/uniaxial/Concrete0.o \
 	$(FE)/material/uniaxial/Concrete01.o \
+	$(FE)/material/uniaxial/Concrete01T.o \
 	$(FE)/material/uniaxial/Concrete02.o \
 	$(FE)/material/uniaxial/Concrete02IS.o \
 	$(FE)/material/uniaxial/Concrete04.o \
@@ -965,6 +972,7 @@ SECTION_LIBS = $(FE)/material/section/SectionForceDeformation.o \
 	$(FE)/material/section/GenericSection1d.o \
 	$(FE)/material/section/ElasticPlateSection.o \
 	$(FE)/material/section/ElasticMembranePlateSection.o \
+	$(FE)/material/section/ElasticMembranePlateSectionUncoupled.o \
 	$(FE)/material/section/MembranePlateFiberSection.o \
 	$(FE)/material/section/Bidirectional.o \
 	$(FE)/material/section/Elliptical2.o \

@@ -1,7 +1,9 @@
 include ../../../Makefile.def
 
 OBJS       = MVLEM.o \
-	SFI_MVLEM.o
+	SFI_MVLEM.o \
+	FourNodeMVLEM3D.o \
+	FourNodeSFI_MVLEM3D
 
 
 all:         $(OBJS)

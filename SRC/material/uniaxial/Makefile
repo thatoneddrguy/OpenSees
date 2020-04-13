@@ -32,7 +32,9 @@ OBJS       = UniaxialMaterial.o \
 	Cast.o \
         HardeningMaterial.o \
         HardeningMaterial2.o \
+	Concrete0.o \
 	Concrete01.o \
+	Concrete01T.o \
 	Concrete02Thermal.o \
 	Steel02Thermal.o \
 	Steel01Thermal.o \

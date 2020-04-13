@@ -5,6 +5,7 @@ OBJS       = FourNodeQuad.o \
 	ConstantPressureVolumeQuad.o \
 	EnhancedQuad.o \
 	FourNodeQuad3d.o \
+	FourNodeQuadWall3d.o \
 	NineNodeMixedQuad.o \
 	FourNodeQuadWithSensitivity.o
 

@@ -21,13 +21,13 @@
 # that will be created (if this all works!)
 
 # for putting binary
-binpath = /home/student/OpenSees-latest/bin
+binpath = /home/student/OpenSees/bin
 # parallel libraries
-paralleldir = /home/student/petsc/arch-linux2-c-debug
+paralleldir = /home/student/petsc/arch-linux2-c-opt
 # opensees root
-openseesdir = /home/student/OpenSees-latest
+openseesdir = /home/student/OpenSees
 # directory for putting temp library files
-libpath = /home/student/OpenSees-latest/lib
+libpath = /home/student/OpenSees/lib
 # python include path
 pythoninclude = /usr/include/python3.7
 

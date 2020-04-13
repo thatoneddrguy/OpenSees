@@ -39,6 +39,7 @@
 #include <Matrix.h>
 #include <Vector.h>
 #include <ID.h>
+#include <math.h>
 
 class Node;
 class NDMaterial;

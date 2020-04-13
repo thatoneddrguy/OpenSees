@@ -11,6 +11,7 @@ OBJS       = SectionForceDeformation.o \
 	ParallelSection.o \
 	ElasticPlateSection.o \
 	ElasticMembranePlateSection.o \
+	ElasticMembranePlateSectionUncoupled.o \
 	MembranePlateFiberSection.o \
 	TclModelBuilderSectionCommand.o \
 	FiberSection2d.o \
