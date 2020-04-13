@@ -155,6 +155,8 @@ TCL_COMMAND_LIBS = $(FE)/domain/pattern/TclPatternCommand.o \
 	$(FE)/material/uniaxial/snap/TclSnapMaterialCommand.o \
 	$(FE)/material/uniaxial/fedeas/TclFedeasMaterialCommand.o \
 	$(FE)/material/uniaxial/drain/TclDrainMaterialCommand.o \
+	$(FE)/element/mvlem/TclFourNodeMVLEM3DCommand.o \
+	$(FE)/element/mvlem/TclFourNodeSFI_MVLEM3DCommand.o \
 	$(FE)/api/elementAPI_TCL.o
 
 
